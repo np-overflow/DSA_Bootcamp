@@ -13,10 +13,13 @@ class SinglyLinkedList:
     # APPEND
     def append(self, value):
         node = Node(value)
-        temp = self.head
-        for i in range(self.length -1):
-            temp = temp.next
-        temp.next = node
+        if self.head!= None:
+            temp = self.head
+            for i in range(self.length -1):
+                temp = temp.next
+            temp.next = node
+        else:
+            self.head = node
         self.length +=1
 
 
@@ -61,11 +64,9 @@ class SinglyLinkedList:
                 else:
                     temp2 = temp.next
                     temp.next = temp2.next
-                    temp.next.prev = temp
                     temp2 = None
               
                self.length -=1
-
                return True
 
     def search(self, target):
@@ -77,19 +78,26 @@ class SinglyLinkedList:
           return False
 
     def print_list(self):
-       temp = self.head
-       for i in range(self.length):
-               print(temp.value)
-               temp = temp.next
+       if self.length != 0:
+            temp = self.head
+            for i in range(self.length):
+                    print(temp.value)
+                    temp = temp.next
 
-       return 
+            return 
+       else:
+            print("Empty List!")
 
 
 singly = SinglyLinkedList(10)
-singly.append(8)
-singly.append(28)
-singly.insert(1, 6)
+singly.remove(0)
 singly.print_list()
+singly.insert(0,8)
+singly.append(28)
+singly.insert(2, 6)
+singly.print_list()
+print(singly.search(8))
 print()
-singly.remove(2)
+singly.remove(1)
+print(singly.search(8))
 singly.print_list()
