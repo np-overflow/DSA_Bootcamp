@@ -9,103 +9,115 @@ def test(n): #space complexity example
 
 class Node:
     def __init__(self, data):
-        self.data = data
+        self.value = data
         self.next: Node = None
-        self.previous :Node = None
+        self.prev :Node = None
 
-class circular_linkedList:
-    def __init__(self):
-        self.head: Node = None
-        self.size = 0
+class CircularLinkedList:
+    def __init__(self,data):
+        node = Node(data)
+        self.head = node
+        self.length = 1
+        self.head.prev = self.head
+        self.head.next = self.head
     
-    def _append(self,data):
+    def append(self,data):
             node = Node(data)
-            if self.head != None:
-                    temp = self.head.previous
+            if self.length != 0:
+                    temp = self.head.prev
                     temp.next = node
                     node.next = self.head
-                    node.previous = temp
-                    self.head.previous = node 
-                    self.size+= 1
+                    node.prev = temp
+                    self.head.prev = node 
+                    self.length+= 1
                     return
             else:
                 self.head = node
-                self.head.previous = self.head
+                self.head.prev = self.head
                 self.head.next = self.head
-                self.size+= 1
+                self.length+= 1
                 return
 
-    def _insertAt(self,index:int,data):
-         if (index > (self.size) or index < 0):
+    def insert(self,index:int,data):
+         if (index > (self.length) or index < 0):
               return False
          else:
               node = Node(data)
-              temp = self.head
-              for i in range(index-1):
-                   temp = temp.next
-            
-              node.previous = temp
-              node.next = temp.next
-              temp.next = node
-              return
-              
-    def _search(self, target):
-            temp = self.head
-            while (True):
-                if target == temp.data:
-                    return True
-                temp = temp.next
-                if temp == self.head:
-                    return False
+              if index == 0:
+                   node.prev = self.head.prev
+                   self.head.prev.next = node
+                   node.next = self.head
+                   self.head.prev = node
+                   self.head = node
+              else:
+                    temp = self.head
+                    for i in range(index-1):
+                         temp = temp.next
+                    
+                    node.prev = temp
+                    node.next = temp.next
+                    temp.next = node
+                    
+                    if (index == self.length):
+                         self.head.prev = node
+                         node.next == self.head
+          
 
-    def _print(self):
-         temp = self.head
-         while (True):
-              print(temp.data)
-              temp = temp.next
-              if (temp == self.head):
-                  return
+              self.length +=1
+
+              return True
               
-    def _dequeue(self):
-         temp = self.head.previous
-         if self.size == 1:
-              self.head = None
-         else:
-               beforeTemp = temp.previous
-               beforeTemp.next = self.head
-               self.head.previous =beforeTemp
-               temp = None
+    def search(self, target):
+            temp = self.head
+            for i in range(self.length):
+                 if temp.value == target:
+                      return True
+                 temp = temp.next
+            return False
+
+    def print_list(self):
+          temp = self.head
+          for i in range(self.length):
+               print(temp.value)
+               temp = temp.next
+
+          return 
+              
     
-    def _deleteAt(self,index:int):
-         if (index < 0 or index > self.size -1):
+    def remove(self,index:int):
+         if (index < 0 or index > self.length -1):
               return False
          else:
-              if self.size == 1:
-                   self.head =None
-              else:  
                if (index ==0):
                 temp = self.head.next
-                temp.previous = self.head.previous
-                self.head.previous.next = temp
+                temp.prev = self.head.prev
+                self.head.prev.next = temp
                 self.head = None
                 self.head = temp
                else:
                 temp = self.head
                 for i in range(index -1):
                     temp = temp.next
-                temp.next = temp.next.next
-                temp.next.previous = temp
-                temp = None
+                
+                temp2 = temp.next
+                temp.next = temp2.next
+                temp.next.prev = temp
+                temp2 = None
+              
+               self.length -=1
+               return True
 
 
 if __name__ == "__main__":
-    doubly = circular_linkedList()
-    doubly._append(5) 
-    doubly._append(6)
-    doubly._insertAt(1,9)
-    doubly._append(7)
-    doubly._append(8)
-    doubly._deleteAt(2)
-    print(doubly._search(20))
-    doubly._print()
+    doubly = CircularLinkedList(11)
+    doubly.append(5) 
+    doubly.append(6)
+    doubly.insert(3,9)
+#     doubly.append(7)
+#     doubly.append(8)
+    doubly.print_list()
+    print(doubly.search(11))
+    doubly.remove(1)
+    print()
+    doubly.print_list()
     test(5)

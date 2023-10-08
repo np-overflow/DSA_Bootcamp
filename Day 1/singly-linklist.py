@@ -4,99 +4,88 @@ class Node:
         self.next = None
 
 
-class LinkedList:
+class SinglyLinkedList:
     def __init__(self, value):
         node = Node(value)
         self.head = node
-        self.tail = node
         self.length = 1
 
     # APPEND
     def append(self, value):
-        new_node = Node(value)
-        if self.length == 0:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            self.tail.next = new_node
-            self.tail = new_node
-        self.length += 1
-        return True
-
-    # GET
-    def get(self, index):
-        if index < 0 or index >= self.length:
-            return None
+        node = Node(value)
         temp = self.head
-        for _ in range(index):
+        for i in range(self.length -1):
             temp = temp.next
-        return temp
+        temp.next = node
+        self.length +=1
+
 
     # INSERT
     def insert(self, index, value):
-        if index < 0 or index > self.length:
-            return False
-        if index == 0:
-            return self.prepend(value)
-        if index == self.length:
-            return self.append(value)
-        new_node = Node(value)
-        temp = self.get(index - 1)
-        new_node.next = temp.next
-        temp.next = new_node
-        self.length += 1
-        return True
+         if (index > (self.length) or index < 0):
+              return False
+         else:
+              node = Node(value)
+              if index == 0:
+                   node.next = self.head
+                   self.head = node
+              else:
+                    temp = self.head
+                    for i in range(index-1):
+                         temp = temp.next
+                    
+                    node.next = temp.next
+                    temp.next = node
+          
+
+              self.length +=1
+
+              return True
 
     # REMOVE
     def remove(self, index):
-        if index < 0 or index >= self.length:
-            return None
-        if index == 0:
-            return self.pop_first()
-        if index == self.length - 1:
-            return self.pop()
-        pre = self.get(index - 1)
-        temp = pre.next
-        pre.next = temp.next
-        temp.next = None
-        self.length -= 1
-        return temp
+             if (index < 0 or index > self.length -1):
+              return False
+             else:
+               if (index == 0):
+                temp = self.head.next
+                self.head = None
+                self.head = temp
+               else:
+                temp = self.head
+                for i in range(index -1):
+                    temp = temp.next
+                    
+                if index ==self.length -1:
+                    temp.next = None
+                else:
+                    temp2 = temp.next
+                    temp.next = temp2.next
+                    temp.next.prev = temp
+                    temp2 = None
+              
+               self.length -=1
 
-    def pop_first(self):
-        if self.length == 0:
-            return None
-        temp = self.head
-        self.head = self.head.next
-        temp.next = None
-        self.length -= 1
-        if self.length == 0:
-            self.tail = None
-        return temp
+               return True
 
-    def pop(self):
-        if self.length == 0:
-            return None
-        temp = self.head
-        pre = self.head
-        while (temp.next):
-            pre = temp
-            temp = temp.next
-        self.tail = pre
-        self.tail.next = None
-        self.length -= 1
-        if self.length == 0:
-            self.head = None
-            self.tail = None
-        return temp
+    def search(self, target):
+          temp = self.head
+          for x in range(self.length):
+                 if temp.value == target:
+                      return True
+                 temp = temp.next
+          return False
 
     def print_list(self):
-        temp = self.head
-        while temp is not None:
-            print(temp.value)
-            temp = temp.next
+       temp = self.head
+       for i in range(self.length):
+               print(temp.value)
+               temp = temp.next
+
+       return 
 
 
-singly = LinkedList(10)
+singly = SinglyLinkedList(10)
 singly.append(8)
 singly.append(28)
 singly.insert(1, 6)
