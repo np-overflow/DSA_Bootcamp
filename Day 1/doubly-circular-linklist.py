@@ -1,6 +1,6 @@
 import math
 
-def test(n): #time complexity example
+def test(n): #space complexity example
     testlist = []
     for i in range(math.ceil(math.log(n))):
         testlist.append(i)
