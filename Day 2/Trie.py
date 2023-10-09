@@ -22,55 +22,46 @@ class Trie:
         current_node.is_end_of_word = True
 
     def search(self, query):
-        def dfs(node, current_prefix):
-            if node.is_end_of_word:
-                results.append(current_prefix)
-            
-            for i, child_node in enumerate(node.children):
-                if child_node:
-                    dfs(child_node, current_prefix + chr(ord("a") + i))
-
         current_node = self.root
         results = []
         prefix = ""
-        
+
+        # Traverse the Trie based on the characters in the query.
         for char in query:
             index = self.char_to_index(char)
             if not current_node.children[index]:
-                return results
+                return "No complete words found for the query!"
             prefix += char
             current_node = current_node.children[index]
-        
-        dfs(current_node, prefix)
-        return [query + word[len(prefix):] for word in results]
 
-    def starts_with(self, prefix):
-        current_node = self.root
-        for char in prefix:
-            index = self.char_to_index(char)
-            if not current_node.children[index]:
-                return False
-            current_node = current_node.children[index]
-        return True
+        stack = [(current_node, prefix)]
+
+        while stack:
+            node, current_prefix = stack.pop()
+
+            if node.is_end_of_word:
+                results.append(current_prefix)
+
+            for i, child_node in enumerate(node.children):
+                if child_node:
+                    stack.append((child_node, current_prefix + chr(97 + i)))
+
+        return results
 
     def delete(self, word):
-        nodes_to_remove = []  # Stack to keep track of nodes to be removed
+        nodes_to_remove = []
         current_node = self.root
 
-        # Find the nodes corresponding to the characters in the word
         for char in word:
             index = self.char_to_index(char)
             if not current_node.children[index]:
-                # Word is not in the Trie
-                return
+                return "Word does not exist!"
             nodes_to_remove.append((index, current_node))
             current_node = current_node.children[index]
 
-        # If the last node represents the end of the word, mark it as not the end
         if current_node.is_end_of_word:
             current_node.is_end_of_word = False
 
-        # Check if the last node has no children; if so, remove it and its ancestors
         if not any(current_node.children):
             for index, parent_node in reversed(nodes_to_remove):
                 parent_node.children[index] = None
@@ -88,3 +79,6 @@ print(results)  # Output: ["app", "apple", "application"]
 trie.delete("app")
 results = trie.search("app")
 print(results)  # Output: ["apple", "application"]
+
+results = trie.search("fish")
+print(results)
