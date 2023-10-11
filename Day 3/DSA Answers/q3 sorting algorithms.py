@@ -1,5 +1,5 @@
 '''
-4. Implementing Various Sorting Algorithms (Total 26 points)
+3. Implementing Various Sorting Algorithms (Total 26 points)
 Let's recap on the various sorting algorithms:
 -	Selection sort
 -	Insertion sort
@@ -67,7 +67,7 @@ def insertion_sort(my_list):
 '''
 
 '''
-c)	Implement an insertion sort within a function for a list. (14 points)
+c)	Implement an quick sort within a function for a list. (14 points)
 Sample output:
 arr = [4, 6, 2, 7, 1, 9, 5]
 

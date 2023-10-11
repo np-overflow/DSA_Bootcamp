@@ -1,6 +1,7 @@
 '''
 2.	Working with Stacks (Total 16 points)
-In this exercise, we will implement a push operation, using the Node() you have did in Q1. 
+In this exercise, we will implement a push operation, using the Node() you 
+have did in Q1. 
 On day 2, the stack implemented used elements in a list to push or pop data.
 However, this time, we are going to use nodes, instead of elements in a list. 
 You can refer to how a Singly Linked List works, for inspiration, from day 1 slides.
@@ -13,17 +14,18 @@ class Stack:
         # Initially there will be zero elements in the stack
         self.size = 0
 
-a)	Implement a push function within the stack class. (Start with def will do, no need to copy over the class Stack()). (4 points)
+a)	Implement a push function within the stack class. 
+(Start with def will do, no need to copy over the class Stack()). (4 points)
 b)	Similar to a), implement a pop function within the stack class. (4 points)
 
 '''
 
 
 class Node:
-  def __init__(self, data):
-    self.value = data
-    # Leave the node initially without a next value
-    self.next = None	
+    def __init__(self, data):
+        self.value = data
+        # Leave the node initially without a next value
+        self.next = None	
 
 
 class Stack:
@@ -48,7 +50,6 @@ class Stack:
     if you are using self.items = [] as an attribute, you will have "items" to work with.
 
     def push(self, data):
-        new_node = Node(data)
         self.items.append(new_node) 
     '''
 

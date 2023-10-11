@@ -1,12 +1,17 @@
 '''
-6.	(Bonus) Recursion Question: Tower of Hanoi (Total 20 points)
-In this exercise, you will implement the Tower of Hanoi puzzle, recursively. The aim is to transfer all disks from one rod to the other. 
+Bonus: Tower of Hanoi (Total 12 points)
+In this exercise, you will implement the Tower of Hanoi puzzle, recursively.
+The aim is to transfer all disks from one rod to the other. 
+You are allowed to search up on this.
+
 However, there are rules:
 -	Only move one disk at a time.
--	Only take the upper disk from one of the stacks and place it on top of the other stack.
+-	Only take the upper disk from one of the stacks and 
+    place it on top of the other stack.
 -	Cannot put a larger disk on top of a smaller one.
 If you are good at imagining, here is an example of this: 
-given the number of disks = 3, the sequence of disks traversing should happen:
+given the number of disks = 3, 
+the sequence of disks traversing should happen:
  
 Disk 1 moved from A to B
 Disk 2 moved from A to C
@@ -18,12 +23,16 @@ Disk 1 moved from A to B
 
 Hint: 
 - notice the pattern of the disk number, we call it n. 
-- To do a recursive function, these are called, executed and then resolved backwards, which is why you can see the base case, n = 1. 
+- To do a recursive function, these are called, executed and then 
+    resolved backwards, which is why you can see the base case, n = 1. 
 - After n = 1, the previous unresolved case, n = 2, is called and resolved. 
-- Then, moving on, it activated the base case again, then resolved the unresolved “previous-previous” case, n = 3. 
+- Then, moving on, it activated the base case again, 
+    then resolved the unresolved “previous-previous” case, n = 3. 
 - Lastly, this cycle repeats itself, which is why you can see the intervals of the cycle being {1, 2, 1}, repeated twice. 
 
-Implement the Tower of Hanoi where n = 3, and there are rods A, B, and C. (If you can go to n = 4, or above, why not? 😊)
+Implement the Tower of Hanoi where n = 3, 
+and there are rods A, B, and C. 
+(If you can go to n = 4, or above, why not? 😊)
 '''
 
 # Original recursion method:
