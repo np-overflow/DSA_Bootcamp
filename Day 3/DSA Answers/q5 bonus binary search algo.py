@@ -8,6 +8,7 @@ Bonus content (optional):
 	Binary Search, O(log_2 n) = O(log n)
 	Sequential Search, or linear search, O(n)
 '''
+
 def binary_search(ordered_list, search_value):
     first = 0
     last = len(ordered_list) - 1

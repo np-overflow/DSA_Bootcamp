@@ -1,6 +1,6 @@
 '''
 1.	Working with Linked Lists (Total 8 points)
-In this exercise, we will implement a linked list. In this case, you are allowed to copy the example codes into the boxes.
+In this exercise, we will implement a singly linked list. In this case, you are allowed to copy the example codes into the boxes.
 
 Given: 
 class Node:
@@ -8,8 +8,8 @@ class Node:
         # Store the value for the node
         self.value = data
 
-a)	Instantiate the node, without a next value. (4 points)
-b)	Instantiate a LinkedList(), without a head or a tail. (4 points)
+a)	Instantiate a node, without a next value. Print out the values of value and the next value. (4 points)
+b)	Instantiate a SinglyLinkedList, without a head or a tail. Print out the values of the head and the tail. (4 points)
 
 '''
 

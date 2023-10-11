@@ -4,43 +4,56 @@ Let's recap on the various sorting algorithms:
 -	Selection sort
 -	Insertion sort
 -	Quick sort
--	Bonus: Bubble sort
--	Bonus: Merge sort
+-	Not covered: Bubble sort
+-	Not covered: Merge sort
 
 We will be implementing all the sorts that are covered.
-a)	Implement a selection sort within a function for a list.
+a)	Implement a selection sort within a function for a list. (6 points)
 
 Sample output:
 my_list = [6, 2, 9, 7, 4, 8]
 Output: [2, 4, 6, 7, 8, 9]
 '''
 
-def selection_sort(my_list):
-    list_length = len(my_list)
-    for i in range(list_length - 1):
-        # Set lowest to the index of the current element
-        lowest = i
-        # Iterate again over the list starting on the next position of the i variable
-        for j in range(i + 1, list_length):
-            # Compare whether the element of the list located at index j is smaller than the current lowest
-            if my_list[j] < my_list[lowest]:
-                lowest = j
-        # Swap the current element with the lowest element found
-        my_list[i], my_list[lowest] = my_list[lowest], my_list[i]
-    return my_list
+# With reference to day 2, slide 30:
+def selectionSort(array, size):
+    for step in range(size):
+        min_idx = step
+
+        for i in range(step + 1, size):
+            if array[i] < array[min_idx]:
+                min_idx = i
+        
+        # put min at the correct position
+        (array[step], array[min_idx]) = (array[min_idx], array[step])
+    
+    return array
 
 my_list = [6, 2, 9, 7, 4, 8]
-print("Selection sort:", selection_sort(my_list))
+print("Selection sort:", selectionSort(my_list, len(my_list)))
 
 
 '''
-b)	Implement an insertion sort within a function for a list.
+b)	Implement an insertion sort within a function for a list. (6 points)
 Sample output:
 my_list = [6, 2, 9, 7, 4, 8]
 
 Output: [2, 4, 6, 7, 8, 9]
 '''
 
+def insertionSort(array):
+    for step in range(1, len(array)):
+        key = array[step]
+        j = step - 1      
+        while j >= 0 and key < array[j]:
+            array[j + 1] = array[j]
+            j = j - 1
+        array[j + 1] = key
+
+my_list = [6, 4, 2, 9, 8, 7]
+print("Insertion sort:", insertionSort(my_list))
+
+'''
 def insertion_sort(my_list):
     list_length = len(my_list)
     for i in range(1, list_length):
@@ -51,14 +64,10 @@ def insertion_sort(my_list):
             j -= 1
         my_list[j + 1] = current_no
     return my_list
-
-my_list = [6, 4, 2, 9, 8, 7]
-print("Insertion sort:", insertion_sort(my_list))
-
-
+'''
 
 '''
-c)	Implement an insertion sort within a function for a list.
+c)	Implement an insertion sort within a function for a list. (14 points)
 Sample output:
 arr = [4, 6, 2, 7, 1, 9, 5]
 
